@@ -50,5 +50,8 @@ time.sleep(2)
 a.forward()
 time.sleep(2)
 a.back()
+time.sleep(2)
+
+a.off()
 
 GPIO.cleanup()
