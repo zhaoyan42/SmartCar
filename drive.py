@@ -1,23 +1,19 @@
 import RPi.GPIO as GPIO
 import time
 
-class L298N_GPIO(object):
+class Motor(object):
     '''
-    This Class is for GPIO to control L298N
+    This Class is a Motor Controlled by GPIO pins
     '''
 
     __in1 = 0
     __in2 = 0
-    __in3 = 0
-    __in4 = 0
     __pwm1 = None
     __pwm2 = None
-    __pwm3 = None
-    __pwm4 = None
-    __pwm_frequncy = 10000
+    __pwm_frequncy = 50
     __real_true = GPIO.HIGH
 
-    def __init__(self,in1,in2,in3,in4,real_true = GPIO.HIGH):
+    def __init__(self,in1,in2,real_true = GPIO.HIGH):
         self.__in1 = in1
         GPIO.setup(self.__in1,GPIO.OUT)
         self.__pwm1 = GPIO.PWM(self.__in1,self.__pwm_frequncy)
@@ -26,70 +22,91 @@ class L298N_GPIO(object):
         GPIO.setup(self.__in2,GPIO.OUT)
         self.__pwm2 = GPIO.PWM(self.__in2,self.__pwm_frequncy)
 
-        self.__in3 = in3
-        GPIO.setup(self.__in3,GPIO.OUT)
-        self.__pwm3 = GPIO.PWM(self.__in3,self.__pwm_frequncy)
-
-        self.__in4 = in4
-        GPIO.setup(self.__in4,GPIO.OUT)
-        self.__pwm4 = GPIO.PWM(self.__in4,self.__pwm_frequncy)
-
         self.__real_true = real_true
 
     def lunch(self):        
         self.__pwm1.start(0)
         self.__pwm2.start(0)
-        self.__pwm3.start(0)
-        self.__pwm4.start(0)
 
-    def forward(self,duty_cycle = 100):
+    def pisitive_rotation(self,duty_cycle = 100):    
         self.__pwm1.ChangeDutyCycle(duty_cycle)
         self.__pwm2.ChangeDutyCycle(0)
-        self.__pwm3.ChangeDutyCycle(duty_cycle)
-        self.__pwm4.ChangeDutyCycle(0)   
-
-    def back(self,duty_cycle = 100):
+   
+    def negative_rotation(self,duty_cycle = 100):
         self.__pwm1.ChangeDutyCycle(0)
         self.__pwm2.ChangeDutyCycle(duty_cycle)
-        self.__pwm3.ChangeDutyCycle(0)
-        self.__pwm4.ChangeDutyCycle(duty_cycle)
 
     def stop(self):
         self.__pwm1.ChangeDutyCycle(0)
         self.__pwm2.ChangeDutyCycle(0)
-        self.__pwm3.ChangeDutyCycle(0)
-        self.__pwm4.ChangeDutyCycle(0)
 
     def terminate(self):
         self.__pwm1.stop()
         self.__pwm2.stop()
-        self.__pwm3.stop()
-        self.__pwm4.stop()
+
+
+class SmartCar(object):
+    '''
+    This class is a driver control all Motors
+    '''
+
+    f_l_motor = None
+    f_r_motor = None
+    b_l_motor = None
+    b_r_motor = None
+
+    def __init__(self,motor_pins,real_true = GPIO.HIGH):
+        self.f_l_motor = Motor(motor_pins[0],motor_pins[1],real_true)
+        self.f_r_motor = Motor(motor_pins[2],motor_pins[3],real_true)
+        self.b_l_motor = Motor(motor_pins[4],motor_pins[5],real_true)
+        self.b_r_motor = Motor(motor_pins[6],motor_pins[7],real_true)
+
+    @property
+    def f_motors(self):
+        return [self.f_l_motor,self.f_r_motor]
+
+    @property
+    def b_motors(self):
+        return [self.b_l_motor,self.b_r_motor]
+
+    @property
+    def r_motors(self):
+        return [self.f_r_motor,self.b_r_motor]
+
+    @property
+    def l_motors(self):
+        return [self.f_l_motor,self.b_l_motor]
+
+    @property
+    def all_motors(self):
+        return [self.f_l_motor,self.f_r_motor,self.b_l_motor,self.b_r_motor]
+
+    def lunch(self):
+        for motor in self.all_motors:
+            motor.lunch()
+
+    def test(self):
+        for motor in self.all_motors:
+            motor.pisitive_rotation(50)
+            time.sleep(5)
+            motor.negative_rotation(50)
+            time.sleep(5)
+            motor.stop()
+
+    def terminate(self):
+        for motor in self.all_motors:
+            motor.terminate()
+
 
 
 GPIO.cleanup()
 
 GPIO.setmode(GPIO.BCM)
 
-l298n1 = L298N_GPIO(18,23,24,25)
-l298n2 = L298N_GPIO(12,16,20,21)
+car = SmartCar([20,21,12,16,18,23,24,25])
 
-l298n1.lunch()
-l298n2.lunch()
-
-for i in range(30,100):
-    l298n1.forward(i)
-    l298n2.forward(i)
-    time.sleep(0.1)
-time.sleep(2)
-
-for i in range(30,100):
-    l298n1.back(i)
-    l298n2.back(i)
-    time.sleep(0.1)
-time.sleep(2)
-
-l298n1.terminate()
-l298n2.terminate()
+car.lunch()
+car.test()
+car.terminate()
 
 GPIO.cleanup()
