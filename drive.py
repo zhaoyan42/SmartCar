@@ -87,10 +87,10 @@ class SmartCar(object):
 
     def test(self):
         for motor in self.all_motors:
-            motor.pisitive_rotation(50)
-            time.sleep(5)
-            motor.negative_rotation(50)
-            time.sleep(5)
+            motor.pisitive_rotation()
+            time.sleep(0.5)
+            motor.negative_rotation()
+            time.sleep(0.5)
             motor.stop()
 
     def terminate(self):
