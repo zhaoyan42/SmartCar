@@ -28,13 +28,21 @@ class Motor(object):
         self.__pwm1.start(0)
         self.__pwm2.start(0)
 
-    def pisitive_rotation(self,duty_cycle = 100):    
-        self.__pwm1.ChangeDutyCycle(duty_cycle)
-        self.__pwm2.ChangeDutyCycle(0)
+    def positive_rotation(self,duty_cycle = 100):    
+        if self.__real_true:
+            self.__pwm1.ChangeDutyCycle(duty_cycle)
+            self.__pwm2.ChangeDutyCycle(0)
+        else:
+            self.__pwm1.ChangeDutyCycle(0)
+            self.__pwm2.ChangeDutyCycle(duty_cycle)
    
     def negative_rotation(self,duty_cycle = 100):
-        self.__pwm1.ChangeDutyCycle(0)
-        self.__pwm2.ChangeDutyCycle(duty_cycle)
+        if self.__real_true:
+            self.__pwm1.ChangeDutyCycle(0)
+            self.__pwm2.ChangeDutyCycle(duty_cycle)
+        else: 
+            self.__pwm1.ChangeDutyCycle(duty_cycle)
+            self.__pwm2.ChangeDutyCycle(0)
 
     def stop(self):
         self.__pwm1.ChangeDutyCycle(0)
@@ -87,26 +95,69 @@ class SmartCar(object):
 
     def test(self):
         for motor in self.all_motors:
-            motor.pisitive_rotation()
+            motor.positive_rotation()
             time.sleep(0.5)
             motor.negative_rotation()
             time.sleep(0.5)
             motor.stop()
 
+    def forward(self,speed_persent):
+        for motor in self.all_motors:
+            motor.positive_rotation(speed_persent)
+
+    def backward(self,speed_persent):
+        for motor in self.all_motors:
+            motor.negative_rotation(speed_persent)
+
+    def rotate_left(self,speed_persent):
+        self.f_l_motor.negative_rotation(speed_persent)
+        self.f_r_motor.positive_rotation(speed_persent)
+        self.b_l_motor.negative_rotation(speed_persent)
+        self.b_r_motor.positive_rotation(speed_persent)
+
+    def rotate_right(self,speed_persent):
+        self.f_l_motor.positive_rotation(speed_persent)
+        self.f_r_motor.negative_rotation(speed_persent)
+        self.b_l_motor.positive_rotation(speed_persent)
+        self.b_r_motor.negative_rotation(speed_persent)
+
+    def turn_left(self,speed_persent):
+        self.f_l_motor.negative_rotation(speed_persent*0)
+        self.f_r_motor.positive_rotation(speed_persent)
+        self.b_l_motor.negative_rotation(speed_persent)
+        self.b_r_motor.positive_rotation(speed_persent)
+
+    def turn_right(self,speed_persent):
+        self.f_l_motor.positive_rotation(speed_persent)
+        self.f_r_motor.negative_rotation(speed_persent*0)
+        self.b_l_motor.positive_rotation(speed_persent)
+        self.b_r_motor.negative_rotation(speed_persent)
+
+
     def terminate(self):
         for motor in self.all_motors:
             motor.terminate()
 
-
+    def stop(self):
+        for motor in self.all_motors:
+            motor.stop()
 
 GPIO.cleanup()
 
 GPIO.setmode(GPIO.BCM)
 
-car = SmartCar([20,21,12,16,18,23,24,25])
+car = SmartCar([24,25,18,23,12,16,20,21],GPIO.LOW)
 
 car.lunch()
-car.test()
+car.rotate_left(50)
+time.sleep(1)
+car.rotate_right(50)
+time.sleep(1)
+car.turn_left(50)
+time.sleep(1)
+car.turn_right(50)
+time.sleep(1)
+car.stop()
 car.terminate()
 
 GPIO.cleanup()
