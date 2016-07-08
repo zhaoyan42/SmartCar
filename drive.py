@@ -10,10 +10,35 @@ car = car.Car([24,25,18,23,12,16,20,21],GPIO.LOW)
 
 car.lunch()
 
-car.forward()
-time.sleep(10)
+car.test()
+
+
+from flask import Flask,render_template,request
+
+app = Flask(__name__)
+
+@app.route("/",methods=['GET','POST'])
+def index():
+    if request.method == 'POST':
+        if request.form["direction"] == "forward":
+            car.forward()
+        elif request.form["direction"] == "backward":
+            car.backward()
+        else:
+            car.stop()
+    return render_template('./UI.html')
+       
+       
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0',port=8888)
+
+
+
+
 
 car.stop()
 car.terminate()
 
 GPIO.cleanup()
+
