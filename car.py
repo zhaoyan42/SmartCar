@@ -39,6 +39,31 @@ class Car(object):
             time.sleep(0.5)
             wheel.stop()
 
+class Car2Wheel(Car):
+    '''
+    This class is a driver control all Wheels
+    '''
+
+    b_l_wheel = None
+    b_r_wheel = None
+
+    def __init__(self,wheel_pins,real_true = GPIO.HIGH):
+        self.b_l_wheel = wheel.Wheel(wheel_pins[4],wheel_pins[5],real_true)
+        self.b_r_wheel = wheel.Wheel(wheel_pins[6],wheel_pins[7],real_true)
+
+    @property
+    def all_wheels(self):
+        return [self.b_l_wheel,self.b_r_wheel]
+
+    def turn_left(self,speed_persent=100):
+        self.b_l_wheel.negative_rotation(speed_persent)
+        self.b_r_wheel.positive_rotation(speed_persent)
+
+    def turn_right(self,speed_persent=100):
+        self.b_l_wheel.positive_rotation(speed_persent)
+        self.b_r_wheel.negative_rotation(speed_persent)
+
+
 
 class Car4Wheel(Car):
     '''
