@@ -1,5 +1,8 @@
 import RPi.GPIO as GPIO
 import time
+import car
+
+GPIO.cleanup()
 
 trigger_pin = 18
 echo_pin = 23
@@ -28,6 +31,23 @@ def get_distance():
     distance = pulse_len / 0.000058
     return distance
 
-while True:
-    print(get_distance())
-    time.sleep(0.1)
+	
+	
+
+car = car.Car2Wheel([12,16,20,21],GPIO.LOW)
+
+car.lunch()
+
+car.test()
+	
+car.forward()
+
+try:
+	while True:	
+		if get_distance()<40:
+			car.turn_left(50)
+			time.sleep(0.5)
+			car.forward()
+except:
+	GPIO.cleanup()
+	

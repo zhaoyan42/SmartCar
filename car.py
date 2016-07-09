@@ -48,8 +48,8 @@ class Car2Wheel(Car):
     b_r_wheel = None
 
     def __init__(self,wheel_pins,real_true = GPIO.HIGH):
-        self.b_l_wheel = wheel.Wheel(wheel_pins[4],wheel_pins[5],real_true)
-        self.b_r_wheel = wheel.Wheel(wheel_pins[6],wheel_pins[7],real_true)
+        self.b_l_wheel = wheel.Wheel(wheel_pins[0],wheel_pins[1],real_true)
+        self.b_r_wheel = wheel.Wheel(wheel_pins[2],wheel_pins[3],real_true)
 
     @property
     def all_wheels(self):

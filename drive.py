@@ -6,7 +6,7 @@ GPIO.cleanup()
 
 GPIO.setmode(GPIO.BCM)
 
-car = car.Car2Wheel([24,25,18,23,12,16,20,21],GPIO.LOW)
+car = car.Car2Wheel([12,16,20,21],GPIO.LOW)
 
 car.lunch()
 
