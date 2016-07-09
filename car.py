@@ -15,10 +15,29 @@ class Car(object):
         for wheel in self.all_wheels:
             wheel.lunch()
 
-    @abstractmethod
+    def terminate(self):
+        for wheel in self.all_wheels:
+            wheel.terminate()
+
+    def stop(self):
+        for wheel in self.all_wheels:
+            wheel.stop()
+
+    def forward(self,speed_persent=100):
+        for wheel in self.all_wheels:
+            wheel.positive_rotation(speed_persent)
+
+    def backward(self,speed_persent=100):
+        for wheel in self.all_wheels:
+            wheel.negative_rotation(speed_persent)
+
     def test(self):
-        pass
-    
+        for wheel in self.all_wheels:
+            wheel.positive_rotation()
+            time.sleep(0.5)
+            wheel.negative_rotation()
+            time.sleep(0.5)
+            wheel.stop()
 
 
 class Car4Wheel(Car):
@@ -57,25 +76,6 @@ class Car4Wheel(Car):
     def all_wheels(self):
         return [self.f_l_wheel,self.f_r_wheel,self.b_l_wheel,self.b_r_wheel]
 
-    def lunch(self):
-        for wheel in self.all_wheels:
-            wheel.lunch()
-
-    def test(self):
-        for wheel in self.all_wheels:
-            wheel.positive_rotation()
-            time.sleep(0.5)
-            wheel.negative_rotation()
-            time.sleep(0.5)
-            wheel.stop()
-
-    def forward(self,speed_persent=100):
-        for wheel in self.all_wheels:
-            wheel.positive_rotation(speed_persent)
-
-    def backward(self,speed_persent=100):
-        for wheel in self.all_wheels:
-            wheel.negative_rotation(speed_persent)
 
     def rotate_left(self,speed_persent=100):
         self.f_l_wheel.negative_rotation(speed_persent)
@@ -102,10 +102,3 @@ class Car4Wheel(Car):
         self.b_r_wheel.negative_rotation(speed_persent)
 
 
-    def terminate(self):
-        for wheel in self.all_wheels:
-            wheel.terminate()
-
-    def stop(self):
-        for wheel in self.all_wheels:
-            wheel.stop()
