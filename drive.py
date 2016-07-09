@@ -6,11 +6,12 @@ GPIO.cleanup()
 
 GPIO.setmode(GPIO.BCM)
 
-car = car.Car([24,25,18,23,12,16,20,21],GPIO.LOW)
+car = car.Car4Wheel([24,25,18,23,12,16,20,21],GPIO.LOW)
 
 car.lunch()
 
 car.test()
+
 
 
 from flask import Flask,render_template,request

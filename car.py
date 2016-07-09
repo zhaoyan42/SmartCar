@@ -1,9 +1,27 @@
 import RPi.GPIO as GPIO
+from abc import ABCMeta,abstractmethod
 import wheel as wheel
 import time
 
 
 class Car(object):
+    __metaclass__ = ABCMeta
+
+    @property
+    def all_wheels(self):
+        pass
+
+    def lunch(self):
+        for wheel in self.all_wheels:
+            wheel.lunch()
+
+    @abstractmethod
+    def test(self):
+        pass
+    
+
+
+class Car4Wheel(Car):
     '''
     This class is a driver control all Wheels
     '''
