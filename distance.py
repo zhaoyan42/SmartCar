@@ -46,7 +46,7 @@ try:
 	while True:	
 		if get_distance()<40:
 			car.turn_left(50)
-			time.sleep(0.5)
+			time.sleep(0.1)
 			car.forward()
 except:
 	GPIO.cleanup()
