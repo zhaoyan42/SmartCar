@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SmartCar.ino" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="__vm\.SmartCar.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -29,5 +26,8 @@
     <ClCompile Include="Wheel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SmartCar.ino" />
   </ItemGroup>
 </Project>
