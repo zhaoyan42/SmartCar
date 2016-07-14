@@ -1,0 +1,32 @@
+
+###############
+#    folder   #
+###############
+/obj
+/bin
+*/obj
+*/bin
+/_*.*
+/packages
+*/Debug
+*/__vm
+
+
+###############
+#     file    #
+###############
+*.lib
+*.cache
+*.user
+*.suo
+_NCrunch*
+App.config
+*/Data/Database*.*
+/Skight.ES.Register.Web.UI/Web.config
+/*.ReSharper
+log*.txt
+/Builds/enviroment WangRong .json
+/Builds/enviroment WangRong-Home.json
+/Builds/Data/LogDatabase.mdf
+/Builds/Data/LogDatabase_log.ldf
+/Builds/enviroment.json
