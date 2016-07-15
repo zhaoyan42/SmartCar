@@ -43,8 +43,18 @@ public:
 
 	void forward()
 	{
-		this->wheel1->run();
-		this->wheel2->run();
+		this->wheel1->rotate_direction(Wheel::Positive);
+		this->wheel1->speed(100);
+		this->wheel2->rotate_direction(Wheel::Positive);
+		this->wheel2->speed(100);
+	}
+
+	void backward()
+	{
+		this->wheel1->rotate_direction(Wheel::Negative);
+		this->wheel1->speed(100);
+		this->wheel2->rotate_direction(Wheel::Negative);
+		this->wheel2->speed(100);
 	}
 
 	void stop()
