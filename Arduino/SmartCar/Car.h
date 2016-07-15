@@ -27,7 +27,7 @@ private:
 
 protected:
 	Wheel *wheel1, *wheel2;
-	
+
 public:
 	Car(int en1, int in1_1, int in1_2, int en2, int in2_1, int in2_2)
 		:Car(new Wheel(en1, in1_1, in1_2), new Wheel(en2, in2_1, in2_2))
@@ -43,18 +43,22 @@ public:
 
 	void forward()
 	{
-		this->wheel1->rotate_direction(Wheel::Positive);
-		this->wheel1->speed(100);
-		this->wheel2->rotate_direction(Wheel::Positive);
-		this->wheel2->speed(100);
+		this->wheel1
+			->rotate_direction(Wheel::Positive)
+			->speed(100);
+		this->wheel2
+			->rotate_direction(Wheel::Positive)
+			->speed(100);
 	}
 
 	void backward()
 	{
-		this->wheel1->rotate_direction(Wheel::Negative);
-		this->wheel1->speed(100);
-		this->wheel2->rotate_direction(Wheel::Negative);
-		this->wheel2->speed(100);
+		this->wheel1
+			->rotate_direction(Wheel::Negative)
+			->speed(100);
+		this->wheel2
+			->rotate_direction(Wheel::Negative)
+			->speed(100);
 	}
 
 	void stop()

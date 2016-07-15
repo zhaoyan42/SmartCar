@@ -44,19 +44,21 @@ public:
 		}
 	}
 
-	void lunch()
+	Wheel* lunch()
 	{
 		pinMode(enable_pin, OUTPUT);
 		pinMode(in1_pin, OUTPUT);
 		pinMode(in2_pin, OUTPUT);
+		return this;
 	}
 
-	void speed(int speed = 100)
+	Wheel* speed(int speed = 100)
 	{
 		analogWrite(enable_pin, map(speed, 0, 100, 0, 255));
+		return this;
 	}
 
-	void rotate_direction(WheelDirection wheel_direction)
+	Wheel* rotate_direction(WheelDirection wheel_direction)
 	{
 		switch (wheel_direction)
 		{
@@ -73,11 +75,13 @@ public:
 		default:
 			throw "Unsupported Direction" + get_wheel_direction_name(wheel_direction);
 		}
+		return this;
 	}
 
-	void stop()
+	Wheel* stop()
 	{
 		speed(0);
+		return this;
 	}
 };
 
