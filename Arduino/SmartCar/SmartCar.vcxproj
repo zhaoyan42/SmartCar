@@ -71,11 +71,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Car.h" />
     <ClInclude Include="Wheel.h" />
     <ClInclude Include="__vm\.SmartCar.vsarduino.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SmartCar.ino" />

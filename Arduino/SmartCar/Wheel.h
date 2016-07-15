@@ -31,9 +31,9 @@ public:
 		pinMode(in2_pin, OUTPUT);
 	}
 
-	void run()
+	void run(int speed=100)
 	{
-		analogWrite(enable_pin, 255);
+		analogWrite(enable_pin, map(speed,0,100,0,255));
 		digitalWrite(in1_pin, HIGH);
 		digitalWrite(in2_pin, LOW);
 	}
