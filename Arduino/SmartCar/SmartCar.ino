@@ -21,6 +21,8 @@ void loop() {
 
 	car.forward();
 	delay(2000);
+	car.backward();
+	delay(2000);
 	car.stop();
 	delay(1000);
 }

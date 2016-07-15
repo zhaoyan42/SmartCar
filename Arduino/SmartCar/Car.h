@@ -19,12 +19,6 @@ private:
 	{
 	}
 
-	~Car()
-	{
-		delete this->wheel1;
-		delete this->wheel2;
-	}
-
 protected:
 	Wheel *wheel1, *wheel2;
 
@@ -34,6 +28,11 @@ public:
 	{
 	}
 
+	~Car()
+	{
+		delete this->wheel1;
+		delete this->wheel2;
+	}
 
 	void lunch()
 	{

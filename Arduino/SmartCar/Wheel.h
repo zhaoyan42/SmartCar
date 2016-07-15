@@ -32,18 +32,6 @@ public:
 		Negative
 	};
 
-	String get_wheel_direction_name(WheelDirection wheel_direction)
-	{
-		switch (wheel_direction)
-		{
-		case Positive:
-			return "Positive";
-
-		case Negative:
-			return "Negative";
-		}
-	}
-
 	Wheel* lunch()
 	{
 		pinMode(enable_pin, OUTPUT);
@@ -72,8 +60,6 @@ public:
 			digitalWrite(in2_pin, HIGH);
 			break;
 
-		default:
-			throw "Unsupported Direction" + get_wheel_direction_name(wheel_direction);
 		}
 		return this;
 	}
