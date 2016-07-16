@@ -23,7 +23,7 @@ class DistanceDetector
 		 digitalWrite(trigger_pin, LOW);
 	 }
 
-	 int receive_signal()
+	 unsigned long receive_signal()
 	 {
 		 return pulseIn(echo_pin, HIGH);
 	 }
@@ -33,6 +33,12 @@ class DistanceDetector
 		: trigger_pin(trigger_pin),
 		  echo_pin(echo_pin)
 	{
+	}
+
+	void lunch()
+	{
+		pinMode(trigger_pin, OUTPUT);
+		pinMode(echo_pin, INPUT);
 	}
 
 	/// return unit is cm

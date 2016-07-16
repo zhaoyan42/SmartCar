@@ -68,40 +68,40 @@ public:
 	{
 		this->wheel_left
 			->rotate_direction(Wheel::Positive)
-			->speed(100);
+			->speed(70);
 		this->wheel_right
 			->rotate_direction(Wheel::Positive)
-			->speed(100);
+			->speed(70);
 	}
 
 	void backward()
 	{
 		this->wheel_left
 			->rotate_direction(Wheel::Negative)
-			->speed(100);
+			->speed(70);
 		this->wheel_right
 			->rotate_direction(Wheel::Negative)
-			->speed(100);
+			->speed(70);
 	}
 
 	void turn_left()
 	{
 		this->wheel_left
 			->rotate_direction(Wheel::Negative)
-			->speed(100);
+			->speed(70);
 		this->wheel_right
 			->rotate_direction(Wheel::Positive)
-			->speed(100);
+			->speed(70);
 	}
 
 	void turn_right()
 	{
 		this->wheel_left
 			->rotate_direction(Wheel::Positive)
-			->speed(100);
+			->speed(70);
 		this->wheel_right
 			->rotate_direction(Wheel::Negative)
-			->speed(100);
+			->speed(70);
 	}
 
 	void stop()
