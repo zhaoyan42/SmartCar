@@ -24,6 +24,9 @@
     <ClInclude Include="Car.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DistanceDetect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SmartCar.ino" />

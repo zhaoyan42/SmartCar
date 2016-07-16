@@ -4,6 +4,7 @@
  Author:	赵晏龙
 */
 
+#include "DistanceDetect.h"
 #include "Car.h"
 
 
