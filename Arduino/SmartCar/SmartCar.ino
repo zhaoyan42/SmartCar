@@ -7,22 +7,26 @@
 #include "Car.h"
 
 
-Car car(5, 2, 4, 6, 7, 8);
+Car car(6, 7, 8, 5, 2, 4);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
 
 	car.lunch();
 
+	car.test();
+
+	car.forward();
+	delay(1000);
+	car.backward();
+	delay(1000);
+	car.turn_left();
+	delay(1000);
+	car.turn_right();
+	delay(1000);
+	car.stop();
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-
-	car.forward();
-	delay(2000);
-	car.backward();
-	delay(2000);
-	car.stop();
-	delay(1000);
 }

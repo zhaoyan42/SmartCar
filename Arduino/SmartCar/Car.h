@@ -13,57 +13,101 @@
 class Car
 {
 private:
-	Car(Wheel* wheel1, Wheel* wheel2)
-		: wheel1(wheel1),
-		wheel2(wheel2)
+	Car(Wheel* wheel_left, Wheel* wheel_right)
+		: wheel_left(wheel_left),
+		wheel_right(wheel_right)
 	{
 	}
 
 protected:
-	Wheel *wheel1, *wheel2;
+	Wheel *wheel_left, *wheel_right;
 
 public:
-	Car(int en1, int in1_1, int in1_2, int en2, int in2_1, int in2_2)
-		:Car(new Wheel(en1, in1_1, in1_2), new Wheel(en2, in2_1, in2_2))
+	Car(int left_en, int left_in1, int left_in2, int right_en, int right_in1, int right_in2)
+		:Car(new Wheel(left_en, left_in1, left_in2), new Wheel(right_en, right_in1, right_in2))
 	{
 	}
 
 	~Car()
 	{
-		delete this->wheel1;
-		delete this->wheel2;
+		delete this->wheel_left;
+		delete this->wheel_right;
 	}
 
 	void lunch()
 	{
-		this->wheel1->lunch();
-		this->wheel2->lunch();
+		this->wheel_left->lunch();
+		this->wheel_right->lunch();
+	}
+
+	void test()
+	{
+
+		this->wheel_left
+			->rotate_direction(Wheel::Positive)
+			->speed(100);
+		delay(500);
+		this->wheel_left
+			->rotate_direction(Wheel::Negative)
+			->speed(100);
+		delay(500);
+		this->wheel_left->stop();
+
+		this->wheel_right
+			->rotate_direction(Wheel::Positive)
+			->speed(100);
+		delay(500);
+		this->wheel_right
+			->rotate_direction(Wheel::Negative)
+			->speed(100);
+		delay(500);
+		this->wheel_right->stop();
 	}
 
 	void forward()
 	{
-		this->wheel1
+		this->wheel_left
 			->rotate_direction(Wheel::Positive)
 			->speed(100);
-		this->wheel2
+		this->wheel_right
 			->rotate_direction(Wheel::Positive)
 			->speed(100);
 	}
 
 	void backward()
 	{
-		this->wheel1
+		this->wheel_left
 			->rotate_direction(Wheel::Negative)
 			->speed(100);
-		this->wheel2
+		this->wheel_right
+			->rotate_direction(Wheel::Negative)
+			->speed(100);
+	}
+
+	void turn_left()
+	{
+		this->wheel_left
+			->rotate_direction(Wheel::Negative)
+			->speed(100);
+		this->wheel_right
+			->rotate_direction(Wheel::Positive)
+			->speed(100);
+	}
+
+	void turn_right()
+	{
+		this->wheel_left
+			->rotate_direction(Wheel::Positive)
+			->speed(100);
+		this->wheel_right
 			->rotate_direction(Wheel::Negative)
 			->speed(100);
 	}
 
 	void stop()
 	{
-		this->wheel1->stop();
-		this->wheel2->stop();
+		this->wheel_left->stop();
+		this->wheel_right->stop();
 	}
 };
 
