@@ -26,7 +26,7 @@ void setup() {
 	distance_detector_high.lunch();
 	distance_detector_low.lunch();
 
-	servo.attach(10);
+	servo.attach(A5);
 
 }
 
