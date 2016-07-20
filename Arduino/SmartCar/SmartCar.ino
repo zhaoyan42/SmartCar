@@ -39,11 +39,20 @@ float get_distance()
 	return distance / 3.0;
 };
 
+long limited_map(long soruce,long soruce_min,long soruce_max,long target_min,long target_max)
+{
+	if (soruce < soruce_min)soruce = soruce_min;
+	if (soruce > soruce_max)soruce = soruce_max;
+	map(soruce, soruce_min, soruce_max, target_min, target_max);
+}
+
 // the loop function runs over and over again until power down or reset
 void loop() {
 	servo.write(90);
 	auto middle_high = distance_detector_high.get_distance();
 	auto middle_low = distance_detector_low.get_distance();
+	auto speed = limited_map((middle_low+ middle_high)/2, 30, 100, 50, 100);
+	Serial.println(speed);
 	if (middle_high < 40 || middle_low <40)
 	{
 		car.stop();
@@ -60,16 +69,16 @@ void loop() {
 
 		if(right_distance>left_distance)
 		{
-			car.turn_right();
+			car.turn_right(speed);
 		}
 		else
 		{
-			car.turn_left();
+			car.turn_left(speed);
 		}
 		delay(500);
 	}
 	else
 	{
-		car.forward();
+		car.forward(speed);
 	}
 }
