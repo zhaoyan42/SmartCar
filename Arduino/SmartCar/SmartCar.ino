@@ -9,7 +9,7 @@
 #include "DistanceDetector.h"
 
 
-Car car(6, 7, 8, 5, 2, 4);
+Car car(6, 7, 8, 5, 9, 4);
 DistanceDetector distance_detector_high(A0, A1);
 DistanceDetector distance_detector_low(A2, A3);
 Servo servo;
@@ -26,7 +26,7 @@ void setup() {
 	distance_detector_high.lunch();
 	distance_detector_low.lunch();
 
-	servo.attach(3);
+	servo.attach(10);
 
 }
 
@@ -43,7 +43,7 @@ long limited_map(long soruce,long soruce_min,long soruce_max,long target_min,lon
 {
 	if (soruce < soruce_min)soruce = soruce_min;
 	if (soruce > soruce_max)soruce = soruce_max;
-	map(soruce, soruce_min, soruce_max, target_min, target_max);
+	return map(soruce, soruce_min, soruce_max, target_min, target_max);
 }
 
 // the loop function runs over and over again until power down or reset
