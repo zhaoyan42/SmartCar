@@ -10,8 +10,8 @@
 
 
 Car car(6, 7, 8, 5, 2, 4);
-DistanceDetector distance_detector_high(13, 12);
-DistanceDetector distance_detector_low(10, 11);
+DistanceDetector distance_detector_high(A0, A1);
+DistanceDetector distance_detector_low(A2, A3);
 Servo servo;
 
 // the setup function runs once when you press reset or power the board
