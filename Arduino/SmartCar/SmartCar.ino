@@ -35,6 +35,7 @@ void setup() {
 	servo.attach(A5);
 	servo.write(servo_middle_anlge);
 
+
 }
 
 float get_distance()
